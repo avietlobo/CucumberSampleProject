@@ -1,0 +1,5 @@
+
+Scenario: Sunday isn't Friday        # features/sample.feature:4
+  Given today is Sunday              # null
+  When I ask whether it's Friday yet # null
+  Then I should be told "Nope"       # null
