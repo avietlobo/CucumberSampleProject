@@ -1,14 +1,23 @@
 package stepDefinitions;
 
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.junit.Cucumber;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import pages.EbayPage;
 
 @RunWith(Cucumber.class)
 public class SampleStepDefinition {
+	
+private WebDriver driver;
+private EbayPage ebayPage;
 	
 	@Given("today is Sunday")
 	public void today_is_sunday() {
@@ -66,6 +75,41 @@ public class SampleStepDefinition {
 	    // Write code here that turns the phrase above into concrete actions
 	   System.out.println("User has logged in successfully");
 	}
+	
+	@Given("I am on the Ebay Home Page")
+	public void i_am_on_the_ebay_home_page() {
+		String url="https://www.ebay.com/";
+		
+		driver.get(url);
+	}
+
+	@When("I enter the testerlifealways@gmail.com and nsdl@{int}")
+	public void i_enter_the_testerlifealways_gmail_com_and_nsdl(Integer int1) {
+	   
+		
+	}
+
+	@Then("I should be able to login successfully")
+	public void i_should_be_able_to_login_successfully() {
+	  driver.quit();
+	}
+	
+	 @Before(value = "@web", order = 1)
+	    public void initWebDriver() throws Throwable {
+		 WebDriverManager.chromedriver().setup();
+			driver = new ChromeDriver();
+	    }
+
+	    @Before()
+	    public void initEbayPage() throws Throwable {
+	    	ebayPage = new EbayPage(driver);
+	    }
+	    
+	    @After(value = "@web")
+	    public void disposeWebDriver() throws Throwable {
+	        driver.quit();
+	    }
+
 
 
 	
